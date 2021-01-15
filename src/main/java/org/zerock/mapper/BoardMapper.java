@@ -1,5 +1,6 @@
 package org.zerock.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,5 @@ public interface BoardMapper {
 	public int delete(Long bno);
 	
 	public int update(BoardVO board);
+
 }
