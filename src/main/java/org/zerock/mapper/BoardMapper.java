@@ -5,11 +5,16 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 public interface BoardMapper {
 	
+	public int getTotalCount(Criteria cri);
+	
 	//@Select("select * from tb1_board where bno > 0 ORDER BY bno desc")
 	public List<BoardVO> getList();
+	
+	public List<BoardVO> getListWithPaging(Criteria cri);
 	
 	public void insert(BoardVO board);
 	

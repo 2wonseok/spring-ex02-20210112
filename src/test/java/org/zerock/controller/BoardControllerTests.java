@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -56,22 +57,36 @@ public class BoardControllerTests {
 	}
 	
 	@Test
-	public void testList() throws Exception {
-//		ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/board/list"));
-//		MvcResult rs = result.andReturn();
-//		ModelAndView mv = rs.getModelAndView();
-//		log.info(mv.getView());
-//		log.info(mv.getModel().get("list"));
+	public void testListPaging() throws Exception {
+
+		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+				.param("pageNum", "2")
+				.param("amount", "10"))
+				.andReturn();
 		
-		Object o = mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
-				.andReturn()
-				.getModelAndView()
-				.getModel().get("list");
+		Map<String, Object> model = result.getModelAndView().getModel();
+		List list = (List) model.get("list");
 		
-		assertNotNull(o);
-		assertTrue(o instanceof List);
-		assertNotEquals(((List) o).size(), 0);
+		assertEquals(10, list.size());
 	}
+	
+//	@Test
+//	public void testList() throws Exception {
+////		ResultActions result = mockMvc.perform(MockMvcRequestBuilders.get("/board/list"));
+////		MvcResult rs = result.andReturn();
+////		ModelAndView mv = rs.getModelAndView();
+////		log.info(mv.getView());
+////		log.info(mv.getModel().get("list"));
+//		
+//		Object o = mockMvc.perform(MockMvcRequestBuilders.get("/board/list"))
+//				.andReturn()
+//				.getModelAndView()
+//				.getModel().get("list");
+//		
+//		assertNotNull(o);
+//		assertTrue(o instanceof List);
+//		assertNotEquals(((List) o).size(), 0);
+//	}
 	
 	@Test
 	public void testRegister() throws Exception {
