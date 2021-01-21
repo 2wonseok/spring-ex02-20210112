@@ -46,8 +46,8 @@
 	<![CDATA[
 			bno > 1
 			)
-		WHERE
-			rn BETWEEN (${pageNum} - 1) * ${amount} + 1 AND ${pageNum} * ${amount}
+			WHERE
+				rn BETWEEN (${pageNum} - 1) * ${amount} + 1 AND ${pageNum} * ${amount}
 	]]>	
 	</select>
 	

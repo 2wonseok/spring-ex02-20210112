@@ -35,7 +35,7 @@
 			<input type="text" class="form-control" name="writer" value="<c:out value='${read.writer }'/>"  readonly/> <br/>
 		</div>				
 		<a href="${root}/board/modify?bno=${read.bno}" class="btn btn-secondary">수정</a>
-		<a href="${root}/board/list?pageNum=${param.pageNum}&?amount=${param.amount}" class="btn btn-primary">뒤로가기</a>
+		<%-- <a href="${root}/board/list?pageNum=${param.pageNum}&?amount=${param.amount}" class="btn btn-primary">뒤로가기</a> --%>
 <%-- 		<a href="${root}/board/remove?bno=${read.bno}" class="btn btn-danger">삭제</a> --%>
 </div>
 </body>

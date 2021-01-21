@@ -12,9 +12,11 @@
 	<c:if test="${param.type != null && param.keyword != null }">
 		<c:param name="type" value="${param.type }"></c:param>
 		<c:param name="keyword" value="${param.keyword }"></c:param>
-	</c:if>	
-	<c:param name="pageNum" value="${param.pageNum }"></c:param>
-	<c:param name="amount" value="${param.amount }"></c:param>
+	</c:if>
+	<c:if test="${param.pageNum  != null && param.amount != null }">	
+		<c:param name="pageNum" value="${param.pageNum }"></c:param>
+		<c:param name="amount" value="${param.amount }"></c:param>
+	</c:if>
 </c:url>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
