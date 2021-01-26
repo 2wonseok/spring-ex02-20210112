@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,7 +47,7 @@ public class BoardController {
 //	}
 	
 	@GetMapping("/list")
-	public void list(Criteria cri, Model model) {
+	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
 		List<BoardVO> list = service.getList(cri);
 		
 		int total = service.getTotal(cri);
@@ -56,7 +57,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/register")
-	public void register() {
+	public void register(@ModelAttribute("cri") Criteria cri) {
 		
 	}
 	
@@ -69,25 +70,36 @@ public class BoardController {
 	}
 	
 	@GetMapping({"/get", "/modify"})	
-	public void get(@RequestParam Long bno, Model model) {
+	public void get(@RequestParam Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
 		model.addAttribute("read", service.get(bno));
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO board, RedirectAttributes rttr) {
+	public String modify(BoardVO board, Criteria cri, RedirectAttributes rttr) {
 		if (service.modify(board)) {
 			rttr.addFlashAttribute("result", "modifySuccess");
 			rttr.addFlashAttribute("message", board.getBno()+"번 글이 수정되었습니다.");
 		}
+
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		return "redirect:/board/list";
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam Long bno, RedirectAttributes rttr) {
+	public String remove(@RequestParam Long bno, Criteria cri, RedirectAttributes rttr) {
 		if (service.remove(bno)) {
 			rttr.addFlashAttribute("result", "deleteSuccess");
 			rttr.addFlashAttribute("message", bno+"번 글이 삭제되었습니다.");
 		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		return "redirect:/board/list";
 	}

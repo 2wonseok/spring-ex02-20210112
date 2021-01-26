@@ -57,6 +57,12 @@ $(document).ready(function() {
 <div class="container col-6">
 <h2>게시물 수정</h2>
 	<form id="modify-form" action="${root}/board/modify" method="post">
+		<input type="hidden" name="pageNum" value=${cri.pageNum }>
+		<input type="hidden" name="amount" value=${cri.amount }>
+		<c:if test="${cri.type != null && cri.keyword != null }">
+			<input type="hidden" name="type" value=${cri.type }>
+			<input type="hidden" name="keyword" value=${cri.keyword }>
+		</c:if>
 		<div class="form-group">		
 			<label for="input1">번호</label> 
 			<input type="text" class="form-control" id="input1" value="${read.bno }" name="bno" readonly/> <br/>

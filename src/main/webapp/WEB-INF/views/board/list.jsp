@@ -36,7 +36,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	var searchForm = $("#searchForm");
+/* 	var searchForm = $("#searchForm");
 	
 	$("#searchForm button").on("click", function(e) {
 		if (!searchForm.find("option:selected").val()) {
@@ -54,7 +54,7 @@ $(document).ready(function(){
 		
 		searchForm.submit();
 
-	});
+	}); */
 /* 	var actionForm = $("#actionForm");
 	
  	$(".page-item a").on("click", function(e) {
@@ -122,13 +122,13 @@ $(document).ready(function(){
 		</thead>
 		<c:forEach items="${list }" var="board">
 			<c:url value="/board/get" var="readLink">
-				<c:if test="${pageMaker.cri.type != null && pageMaker.cri.keyword != null }">
-					<c:param name="type" value="${param.type }"></c:param>
-					<c:param name="keyword" value="${param.keyword }"></c:param>
+				<c:if test="${cri.type != null && cri.keyword != null }">
+					<c:param name="type" value="${cri.type }"></c:param>
+					<c:param name="keyword" value="${cri.keyword }"></c:param>
 				</c:if>	
 				<c:param name="bno" value="${board.bno }"></c:param>
-				<c:param name="pageNum" value="${pageMaker.cri.pageNum }"></c:param>
-				<c:param name="amount" value="${pageMaker.cri.amount }"></c:param>
+				<c:param name="pageNum" value="${cri.pageNum }"></c:param>
+				<c:param name="amount" value="${cri.amount }"></c:param>
 			</c:url>
 			<tr>
 				<td><input type="checkbox" id="bno" name="bno" value="${board.bno }" /></td>
@@ -141,7 +141,7 @@ $(document).ready(function(){
 	</table>
 	</form>
 </div>
-<div class="container d-flex">
+<%-- <div class="container d-flex">
 	<form id="searchForm" action="${root }/board/list" method="get">
 		<select name="type" class="form-control" style="width:220px; display:inline;">
 			<option value=""
@@ -164,7 +164,7 @@ $(document).ready(function(){
 		<input type="hidden" class="form-control" name="amount" value="${pageMaker.cri.amount }"/>
 		<button class="btn btn-primary mb-1">Search</button>
 	</form>
-</div>
+</div> --%>
 <div class="container-sm mt-3">
 	<div class="row justify-content-center">
 		<nav aria-label="Page navigation example">

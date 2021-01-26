@@ -11,23 +11,21 @@
 	</select>
 	
 	<sql id="criteria">
-		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-			<foreach item="type" collection="typeArr">
-				<trim prefix="OR">
-					<choose>
-						<when test="type == 'T'.toString()">
-							UPPER(title) LIKE UPPER('%'||#{keyword}||'%')
-						</when>
-						<when test="type == 'C'.toString()">
-							UPPER(content) LIKE UPPER('%'||#{keyword}||'%')
-						</when>
-						<when test="type == 'W'.toString()">
-							UPPER(writer) LIKE UPPER('%'||#{keyword}||'%')
-						</when>
-					</choose>
-				</trim>
+		<where>
+			<foreach item="type" collection="typeArr" separator="OR">
+				<choose>
+					<when test="type == 'T'.toString()">
+						UPPER(title) LIKE UPPER('%'||#{keyword}||'%')
+					</when>
+					<when test="type == 'C'.toString()">
+						UPPER(content) LIKE UPPER('%'||#{keyword}||'%')
+					</when>
+					<when test="type == 'W'.toString()">
+						UPPER(writer) LIKE UPPER('%'||#{keyword}||'%')
+					</when>
+				</choose>
 			</foreach>
-		</trim>
+	</where>
 	</sql>
 	
 	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
@@ -40,11 +38,9 @@
 				ROW_NUMBER() OVER (ORDER BY bno DESC) rn,
 		 		bno, title, content, writer, regdate, updatedate 
 			FROM tbl_board
-			WHERE
 	]]>
 		<include refid="criteria"></include>
 	<![CDATA[
-			bno > 1
 			)
 			WHERE
 				rn BETWEEN (${pageNum} - 1) * ${amount} + 1 AND ${pageNum} * ${amount}
@@ -86,11 +82,7 @@
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM tbl_board
-		WHERE
-		
 		<include refid="criteria"></include>
-		
-			bno > 0
 	</select>
 </mapper>
 
