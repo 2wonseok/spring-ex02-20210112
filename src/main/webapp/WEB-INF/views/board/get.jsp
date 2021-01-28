@@ -11,6 +11,49 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${root }/resources/js/reply.js"></script>
+<script>
+//	console.log(replyService.name);
+//	replyService.add("my reply");
+/* replyService.add({
+		bno:321, 
+		reply:"new reply 댓글", 
+		replyer:"tester"
+	}, function(result) {
+		console.log(result);
+	}, function(err) {
+		console.log(err);
+	}); */
+	
+/* replyService.getList(
+	{bno:321,page:1},
+	function(data) {
+		console.log(data);
+	},
+	function() {
+		console.log("error");
+	});	 */
+	
+/* replyService.remove(62, function(data) {
+			console.log(data);
+		}, function(error) {
+				console.log(error);
+		}); */
+
+/* replyService.update(
+		{rno:63, reply:"update reply~ㅋㅋ"},
+		function(data) {
+			console.log(data);
+		}, function(error) {
+				console.log(error);
+		}); */
+		
+replyService.get(63, function(data) {
+	console.log(data);
+}, function(error) {
+	console.log(error);
+});
+</script>
 <title>get Page</title>
 </head>
 <body>
