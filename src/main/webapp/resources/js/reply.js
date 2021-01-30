@@ -8,7 +8,7 @@ var replyService = (function() {
 		
 		$.ajax({
 			type: "post",
-			url: "/replies/new",
+			url: appRoot + "/replies/new",
 			data: JSON.stringify(reply),
 			contentType: "application/json; charset=utf-8",
 			success: function(result, stauts, xhr) {
@@ -28,7 +28,7 @@ var replyService = (function() {
 		var bno = param.bno;
 		var page = param.page || 1;
 		
-		$.getJSON("/replies/pages/"+ bno + "/" + page, function(data) {
+		$.getJSON(appRoot + "/replies/pages/"+ bno + "/" + page, function(data) {
 			if (callback) {
 				callback(data);
 			}
@@ -42,7 +42,7 @@ var replyService = (function() {
 	function remove(rno, callback, error) {
 		$.ajax({
 			type: 'delete',
-			url: '/replies/'+ rno,
+			url: appRoot + '/replies/'+ rno,
 			success: function(result, status, xhr) {
 				if (callback) {
 					callback(result);
@@ -60,7 +60,7 @@ var replyService = (function() {
 	
 		$.ajax({
 			type: 'put',
-			url: '/replies/' + reply.rno,
+			url: appRoot + '/replies/' + reply.rno,
 			data: JSON.stringify(reply),
 			contentType: 'application/json; charset=utf-8',
 			success: function(data, status, xhr) {
@@ -78,21 +78,15 @@ var replyService = (function() {
 	
 	function get(rno, callback, error) {
 		
-		$.ajax({
-			type: 'get',
-			url: '/replies/' + rno,
-			success: function(result, status, xhr) {
-				if (callback) {
-					console.log(result);
-				}
-			},
-			error: function(xhr, status, err) {
-				if (error) {
-					console.log(err);
-				}
+		$.get(appRoot + '/replies/' + rno, function(result) {
+			if (callback) {
+				callback(result);
+			}
+		}).fail(function() {
+			if (error) {
+				error();
 			}
 		});
-	
 	}
 	
 	return {
