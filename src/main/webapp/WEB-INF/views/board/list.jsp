@@ -133,7 +133,15 @@ $(document).ready(function(){
 			<tr>
 				<td><input type="checkbox" id="bno" name="bno" value="${board.bno }" /></td>
 				<td>${board.bno }</td>
-				<td><a href="${readLink }"><c:out value="${board.title }"></c:out></a></td>
+				<td>
+					<a href="${readLink }"><c:out value="${board.title }"></c:out>
+					<c:if test="${board.replyCnt > 0}">
+						<span class="badge badge-info">
+								${board.replyCnt }
+						</span>
+					</c:if>
+					</a>
+				</td>
 				<td><c:out value="${board.writer }"></c:out></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
 			</tr>
