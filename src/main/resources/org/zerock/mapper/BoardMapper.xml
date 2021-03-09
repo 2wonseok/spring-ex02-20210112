@@ -89,6 +89,10 @@
 		UPDATE tbl_board SET replycnt = replycnt + #{amount}
 		WHERE bno = #{bno}
 	</update>
+	
+	<delete id="replyDelete">
+		DELETE FROM tbl_reply WHERE bno = #{bno}
+	</delete>
 </mapper>
 
 

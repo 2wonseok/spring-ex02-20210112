@@ -107,6 +107,7 @@ public class BoardController {
 	@PostMapping("/checkDel")
 	public String checkDel(@RequestParam("bno") ArrayList<Long> bno, RedirectAttributes rttr) {
 		for (Long no : bno) {
+			service.replyDelete(no);
 			if (service.remove(no)) {
 				rttr.addFlashAttribute("result", "deleteSuccess");
 				rttr.addFlashAttribute("message", bno+"번 글이 삭제되었습니다.");
