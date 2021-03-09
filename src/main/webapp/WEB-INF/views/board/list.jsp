@@ -113,7 +113,7 @@ $(document).ready(function(){
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th><input type="checkbox" id="allCheck" name="bno" value="${board.bno }"/></th>
+				<th><input type="checkbox" id="allCheck" value="${board.bno }"/></th>
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
